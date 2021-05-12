@@ -11,7 +11,7 @@
         android:layout_height="200dp"
         android:text="Cheltuieli"
         android:textSize="100sp"
-        android:layout_gravity="top"/>
+        android:layout_gravity="bottom"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCheltuieli"

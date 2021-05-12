@@ -1,6 +1,7 @@
 package com.example.commonbudgetmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
@@ -23,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements UserOperations {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(savedInstanceState == null) {
+            //incarca by default fragmentul cheltuieli
+            FragCheltuieli fragCheltuieli = new FragCheltuieli();
+            getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container, fragCheltuieli, null).commit();
+        }
 /*
         findViewById(R.id.button).setOnClickListener(view ->
                 //makeSharedPreferences()
@@ -31,28 +37,16 @@ public class MainActivity extends AppCompatActivity implements UserOperations {
 */
 
         findViewById(R.id.butonCheltuieli).setOnClickListener(view ->
-                load_frag(0)
+                load_frag(new FragCheltuieli())
                 );
         findViewById(R.id.butonVenituri).setOnClickListener(view ->
-                load_frag(1)
+                load_frag(new FragVenituri())
                 );
-
     }
 
-    private void load_frag(int index){
+    private void load_frag(Fragment fragment){
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if(index == 0) {
-            FragCheltuieli fragCheltuieli = new FragCheltuieli();
-            fragmentTransaction.replace(R.id.fragment_container, fragCheltuieli);
-
-            fragmentTransaction.detach(fragCheltuieli);
-        }
-        else{
-            FragVenituri fragVenituri = new FragVenituri();
-            fragmentTransaction.replace(R.id.fragment_container, fragVenituri);
-
-            fragmentTransaction.detach(fragVenituri);
-        }
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
 

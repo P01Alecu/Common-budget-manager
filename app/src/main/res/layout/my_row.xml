@@ -4,16 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="70dp"
     android:layout_margin="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -37,6 +38,8 @@
             tools:layout_conversion_absoluteWidth="58dp"
             tools:layout_editor_absoluteX="354dp"
             tools:layout_editor_absoluteY="0dp"
+            android:textSize="32sp"
+            android:layout_gravity="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -50,6 +53,8 @@
             tools:layout_conversion_absoluteWidth="58dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp"
+            android:textSize="32sp"
+            android:layout_gravity="start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

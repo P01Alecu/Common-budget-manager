@@ -19,7 +19,7 @@ public class FragCheltuieli extends Fragment {
                              Bundle savedInstanceState) {
 
         String s1[] = {"cheltuiala 1", "cheltuiala 2", "cheltuiala 3"},
-                s2[] = {"100", "200", "300"};
+                s2[] = {"-100", "-200", "-300"};
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_cheltuieli, container, false);
@@ -32,6 +32,5 @@ public class FragCheltuieli extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         
         return view;
-        //return inflater.inflate(R.layout.fragment_frag_cheltuieli, container, false);
     }
 }

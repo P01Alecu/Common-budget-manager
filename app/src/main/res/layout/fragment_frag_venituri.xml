@@ -13,4 +13,8 @@
         android:textSize="100sp"
         android:layout_gravity="bottom" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCheltuieli"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
