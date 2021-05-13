@@ -1,12 +1,18 @@
 package com.example.commonbudgetmanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -35,7 +41,13 @@ public class MainActivity extends AppCompatActivity implements UserOperations {
                 insertUsers()
                 );
 */
+        //////test
+        findViewById(R.id.text_buget).setOnClickListener(view ->
+                    load_activity(new Intent(MainActivity.this, adaugaTranzactie.class))
+                );
 
+
+        ////
         findViewById(R.id.butonCheltuieli).setOnClickListener(view ->
                 load_frag(new FragCheltuieli())
                 );
@@ -48,6 +60,32 @@ public class MainActivity extends AppCompatActivity implements UserOperations {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.meniu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.main:
+                Toast.makeText(this, "main main main", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.log:
+                Toast.makeText(this, "second second second", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void load_activity(Intent i){
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void insertUsers(){

@@ -5,4 +5,6 @@
     <string name="venituri">Venituri</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="selectare_utilizator">Selectare utilizator</string>
+    <string name="acasa">Acasa</string>
 </resources>
