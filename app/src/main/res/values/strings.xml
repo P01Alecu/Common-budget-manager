@@ -3,8 +3,13 @@
     <string name="buget">Buget</string>
     <string name="cheltuieli">Cheltuieli</string>
     <string name="venituri">Venituri</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="selectare_utilizator">Selectare utilizator</string>
     <string name="acasa">Acasa</string>
+    <string name="navigation_drawer_open">Deschide bara navigare</string>
+    <string name="navigation_drawer_close">Inchide bara navigare</string>
+    <string name="nume">Nume</string>
+    <string name="introduceti_numele">Introduceti numele</string>
+    <string name="foloseste_numele">Foloseste numele</string>
+    <string name="adauga_tranzactie">Adauga tranzactie</string>
 </resources>
