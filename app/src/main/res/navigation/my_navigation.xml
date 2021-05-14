@@ -14,4 +14,26 @@
         android:id="@+id/adaugaTranzactie"
         android:name="com.example.commonbudgetmanager.adaugaTranzactie"
         android:label="adaugaTranzactie" />
+    <fragment
+        android:id="@+id/fragCheltuieli"
+        android:name="com.example.commonbudgetmanager.FragCheltuieli"
+        android:label="fragment_frag_venituri"
+        tools:layout="@layout/fragment_frag_venituri" >
+        <action
+            android:id="@+id/action_fragCheltuieli_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/adaugaUtilizator"
+        android:name="com.example.commonbudgetmanager.adaugaUtilizator"
+        android:label="adauga_utilizator"
+        tools:layout="@layout/adauga_utilizator" />
+    <fragment
+        android:id="@+id/fragVenituri"
+        android:name="com.example.commonbudgetmanager.FragVenituri"
+        android:label="FragVenituri" >
+        <action
+            android:id="@+id/action_fragVenituri_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>

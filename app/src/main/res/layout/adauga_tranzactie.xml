@@ -26,7 +26,7 @@
             android:id="@+id/editTextSuma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
             android:text="@string/introduceti_suma"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -39,7 +39,7 @@
             android:id="@+id/editTextDescriere"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:text="@string/descriere_tranzactie"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -49,6 +49,13 @@
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAutofill="yes" />
 
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"/>
 
         <Button
             android:id="@+id/butonAdaugaTranzactie"

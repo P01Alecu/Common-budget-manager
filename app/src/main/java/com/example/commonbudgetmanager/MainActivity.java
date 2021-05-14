@@ -55,23 +55,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(savedInstanceState == null) {
             //incarca by default fragmentul cheltuieli
             FragCheltuieli fragCheltuieli = new FragCheltuieli();
-            getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container, fragCheltuieli, null).commit();
+            getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.fragment_container, fragCheltuieli).commit();
         }
 
         findViewById(R.id.text_buget).setOnClickListener(view ->
                   load_activity(new Intent(MainActivity.this, adaugaTranzactie.class))
         );
         findViewById(R.id.butonCheltuieli).setOnClickListener(view ->
-                load_frag(new FragCheltuieli())
+                load_frag(new FragCheltuieli(), name)
                 );
         findViewById(R.id.butonVenituri).setOnClickListener(view ->
-                load_frag(new FragVenituri())
+                load_frag(new FragVenituri(), name)
                 );
     }
 
-    private void load_frag(Fragment fragment){
+    private void load_frag(Fragment fragment, String name){
+        Bundle bundle = new Bundle();
+        bundle.putString("Name", name);
+        fragment.setArguments(bundle);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment, null);
         fragmentTransaction.commit();
     }
 
@@ -82,12 +85,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Double returnBudget(String name){
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
-        List<User> userList = db.userDao().getAllTransactions();
+        List<User> userList = null;
+        try{
+            userList = db.userDao().getAllTransactions();
+        }catch(Exception e){
+            return 0.00;
+        }
         Double total = 0.00;
         for(int i = 0; i < userList.size(); i++)
         {
             if(userList.get(i).name.equals(name))
-                total += userList.get(i).suma;
+                if(userList.get(i).tranzactie.equals("Cheltuiala"))
+                    total -= userList.get(i).suma;
+                else
+                    total += userList.get(i).suma;
         }
         return total;
     }

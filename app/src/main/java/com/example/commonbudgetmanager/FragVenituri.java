@@ -16,9 +16,16 @@ public class FragVenituri extends Fragment {
     RecyclerView recyclerView;
     private List<User> userList;
 
+    String name;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            name = bundle.getString("Name", "");
+        }
 
         View view = inflater.inflate(R.layout.fragment_frag_venituri, container, false);
         loadTransactionList();
@@ -26,15 +33,21 @@ public class FragVenituri extends Fragment {
         //getActivity() -> return context
         recycleAdapter myAdapter = new recycleAdapter(getActivity());
 
-        recyclerView.setAdapter(myAdapter);
-        myAdapter.setUserList(userList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        if(userList != null) {
+            recyclerView.setAdapter(myAdapter);
+            myAdapter.setUserList(userList);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
         return view;
     }
 
     private void loadTransactionList(){
         AppDatabase db = AppDatabase.getDbInstance(getActivity().getApplicationContext());
-        userList = db.userDao().getAllTransactions();
+        try {
+            //userList = db.userDao().getAllTransactions();
+            userList = db.userDao().getTransaction(name,"Venit");
+        }catch (Exception e) {
+
+        }
     }
 }

@@ -19,4 +19,11 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     public List<User> getAllTransactions();
 
+    @Query("SELECT * FROM user WHERE tranzactie = :type AND name = :name")
+    public List<User> getTransaction(String name, String type);
+
+    /*
+    @Query("SELECT * FROM user WHERE name = :name AND tranzactie = :type")
+    public List<User> getBuget(String name, String type);
+    */
 }

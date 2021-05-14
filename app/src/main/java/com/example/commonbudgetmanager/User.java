@@ -13,10 +13,12 @@ public class User {
     public String name;
     public String descriere;
     public Double suma;
+    public String tranzactie;
 
-    public User(String name, String descriere, Double suma){
+    public User(String name, String descriere, Double suma, String tranzactie){
         this.name = name;
         this.descriere = descriere;
         this.suma = suma;
+        this.tranzactie = tranzactie;
     }
 }

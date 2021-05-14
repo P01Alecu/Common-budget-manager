@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,30 +48,48 @@ public class adaugaTranzactie extends AppCompatActivity implements NavigationVie
         //
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
+        //spinner
+        Spinner dropdown = findViewById(R.id.spinner);
+        String[] itemsForSpinner = new String[]{"Cheltuiala", "Venit"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, itemsForSpinner);
+        dropdown.setAdapter(adapter);
+
         final EditText sumaInput = findViewById(R.id.editTextSuma);
+        sumaInput.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                sumaInput.getText().clear();
+            }
+        });
         final EditText descriereInput = findViewById(R.id.editTextDescriere);
+        descriereInput.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                descriereInput.getText().clear();
+            }
+        });
 
         Button saveButton = findViewById(R.id.butonAdaugaTranzactie);
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                saveNewTransaction(name, descriereInput.getText().toString(), sumaInput.getText().toString());
+                Spinner tipTranzactie = findViewById(R.id.spinner);
+                Integer selectedIndex = tipTranzactie.getSelectedItemPosition();
+                saveNewTransaction(name, descriereInput.getText().toString(), sumaInput.getText().toString(), selectedIndex);
             }
         });
         
     }
 
-    private void saveNewTransaction(String name, String descriere, String suma){
+    private void saveNewTransaction(String name, String descriere, String suma, Integer selectedIndex){
         AppDatabase db = AppDatabase.getDbInstance((this.getApplicationContext()));
-
-        User user = new User(name, descriere, Double.parseDouble(suma));
-        //user.name = name;
-        //user.suma = Double.parseDouble(suma);
+        String tipTranzactie = selectedIndex == 0 ? "Cheltuiala" : "Venit";
+        User user = new User(name, descriere, Double.parseDouble(suma), tipTranzactie);
         db.userDao().insertTransaction(user);
-
+        finish();
     }
 
-    //menu relea
+    //menu releated
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
