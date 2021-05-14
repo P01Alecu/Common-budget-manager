@@ -49,13 +49,19 @@
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAutofill="yes" />
 
-
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"/>
+
+        <ImageView
+            android:id="@+id/poza"
+            android:layout_width="500px"
+            android:layout_height="500px"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/add_icon" />
 
         <Button
             android:id="@+id/butonAdaugaTranzactie"
