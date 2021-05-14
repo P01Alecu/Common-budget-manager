@@ -7,18 +7,16 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
-    //@ColumnInfo(name = "First name")
-    public String firstName;
-    public String lastName;
-    public int age;
+    public String name;
+    public String descriere;
+    public Double suma;
 
-    public User(int id, String firstName, String lastName, int age){
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+    public User(String name, String descriere, Double suma){
+        this.name = name;
+        this.descriere = descriere;
+        this.suma = suma;
     }
 }

@@ -12,4 +12,7 @@
     <string name="introduceti_numele">Introduceti numele</string>
     <string name="foloseste_numele">Foloseste numele</string>
     <string name="adauga_tranzactie">Adauga tranzactie</string>
+    <string name="adauga_tranzactia">Adauga tranzactia</string>
+    <string name="introduceti_suma">Introduceti suma</string>
+    <string name="descriere_tranzactie">Descriere tranzactie</string>
 </resources>

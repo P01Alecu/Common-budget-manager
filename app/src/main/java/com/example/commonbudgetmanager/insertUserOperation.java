@@ -14,7 +14,7 @@ public class insertUserOperation extends AsyncTask<User, Object, String> {
     @Override
     protected String doInBackground(User... users){
         try{
-            MyApplication.getAppDatabase().userDao().insertAll(users);
+            MyApplication.getAppDatabase().userDao().insertTransaction(users);
         }catch(Exception e){
             return "error";
         }

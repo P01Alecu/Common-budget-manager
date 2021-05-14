@@ -9,16 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHolder>{
 
-    String data1[], data2[];
+    private List<User> userList;
     Context context;
 
-    public recycleAdapter(Context ct, String s1[], String s2[])
+    public void setUserList(List<User> userList){
+        this.userList = userList;
+        notifyDataSetChanged();
+    }
+
+    public recycleAdapter(Context ct)
     {
         context = ct;
-        data1 = s1;
-        data2 = s2;
     }
 
 
@@ -32,14 +37,14 @@ public class recycleAdapter extends RecyclerView.Adapter<recycleAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.text.setText(data1[position]);
-        holder.suma.setText(data2[position]);
+        holder.text.setText(this.userList.get(position).descriere);
+        holder.suma.setText(this.userList.get(position).suma.toString());
         //holder.myImage.setImageResource(images[position]);
     }
 
     @Override
     public int getItemCount() {
-        return data1.length;
+        return this.userList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

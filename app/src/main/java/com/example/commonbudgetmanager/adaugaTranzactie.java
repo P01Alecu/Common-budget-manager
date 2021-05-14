@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,15 +45,31 @@ public class adaugaTranzactie extends AppCompatActivity implements NavigationVie
         toggle.syncState();
         //
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        final EditText sumaInput = findViewById(R.id.editTextSuma);
+        final EditText descriereInput = findViewById(R.id.editTextDescriere);
+
+        Button saveButton = findViewById(R.id.butonAdaugaTranzactie);
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                saveNewTransaction(name, descriereInput.getText().toString(), sumaInput.getText().toString());
+            }
+        });
+        
     }
 
+    private void saveNewTransaction(String name, String descriere, String suma){
+        AppDatabase db = AppDatabase.getDbInstance((this.getApplicationContext()));
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawer_menu, menu);
-        return true;
+        User user = new User(name, descriere, Double.parseDouble(suma));
+        //user.name = name;
+        //user.suma = Double.parseDouble(suma);
+        db.userDao().insertTransaction(user);
+
     }
+
+    //menu relea
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {

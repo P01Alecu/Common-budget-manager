@@ -10,27 +10,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class FragCheltuieli extends Fragment {
 
     RecyclerView recyclerView;
+    private List<User> userList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String s1[] = {"cheltuiala 1", "cheltuiala 2", "cheltuiala 3"},
-                s2[] = {"-100", "-200", "-300"};
+
+
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_cheltuieli, container, false);
-
+        loadTransactionList();
         recyclerView = view.findViewById(R.id.recyclerViewCheltuieli);
-
         //getActivity() -> return context
-        recycleAdapter myAdapter = new recycleAdapter(getActivity(), s1, s2);
+        recycleAdapter myAdapter = new recycleAdapter(getActivity());
+
         recyclerView.setAdapter(myAdapter);
+        myAdapter.setUserList(userList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         
         return view;
     }
-}
+
+    private void loadTransactionList(){
+        AppDatabase db = AppDatabase.getDbInstance(getActivity().getApplicationContext());
+        userList = db.userDao().getAllTransactions();
+        }
+    }

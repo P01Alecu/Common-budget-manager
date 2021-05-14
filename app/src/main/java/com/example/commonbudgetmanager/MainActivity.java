@@ -16,9 +16,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -32,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPref", Context.MODE_PRIVATE);
         String name = sp.getString("name", "");
+
+        //initializare buget
+        TextView buget = (TextView)findViewById(R.id.numar_buget);
+        buget.setText(returnBudget(name).toString());
 
         //meniu
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -52,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         findViewById(R.id.text_buget).setOnClickListener(view ->
-//                    load_activity(new Intent(MainActivity.this, adaugaTranzactie.class))
-                  load_activity(new Intent(MainActivity.this, adaugaUtilizator.class))
+                  load_activity(new Intent(MainActivity.this, adaugaTranzactie.class))
         );
         findViewById(R.id.butonCheltuieli).setOnClickListener(view ->
                 load_frag(new FragCheltuieli())
@@ -74,32 +80,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawer_menu, menu);
-        return true;
+    private Double returnBudget(String name){
+        AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
+        List<User> userList = db.userDao().getAllTransactions();
+        Double total = 0.00;
+        for(int i = 0; i < userList.size(); i++)
+        {
+            if(userList.get(i).name.equals(name))
+                total += userList.get(i).suma;
+        }
+        return total;
     }
 
-/*
-    private void insertUsers(){
-        User user1 = new User(
-                1,
-                "Alecu",
-                "Gabriel",
-                22
-        );
-        User user2 = new User(
-                2,
-                "Nume",
-                "Prenume",
-                25
-        );
-        User[] userList = new User[]{user1, user2};
-
-        new insertUserOperation(this).execute(userList);
-    }
-*/
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -108,17 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-/*
-    @Override
-    public void insertUsers(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-    }
 
-    @Override
-    public void findUser(User user) {
-
-    }
-*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
