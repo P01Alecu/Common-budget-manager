@@ -155,23 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int resultCode = scheduler.schedule(info);
         if(resultCode == JobScheduler.RESULT_SUCCESS){
             Log.d(TAG, "Job scheduled");
-            /*Notificare*/
-            //pending intent
-            Intent intent = new Intent(MainActivity.this, adaugaTranzactie.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-            //notificare
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "mainNotify")
-                    .setSmallIcon(R.drawable.money_icon)
-                    .setContentTitle("Adauga tranzactii")
-                    .setContentText("Nu uita sa adaugi tranzactii.")
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true);
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(0, builder.build());
-            //NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            //manager.notify(0, builder.build());
-            ////////////////////////
+            //10 secunde -> notificare
         } else{
             Log.d(TAG, "Job schedule failed");
         }
